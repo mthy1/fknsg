@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script>
+		// 需要修改的只有庆典开始和结束时间
+		var start_time = new Date("2024-10-1 00:00:00");	//庆典开始时间，日期格式 "年-月-日 时:分:秒"
+		var end_time = new Date("2024-10-6 23:59:59");		//庆典结束时间，日期格式 "年-月-日 时:分:秒"
+		var total_mission_num = parseInt((parseInt(end_time/1000) - parseInt(start_time/1000))/(90*60))+1;
+		function getNowFormatDate(date) {
+
+			obj = {
+			  year: date.getFullYear(), //获取完整的年份(4位)
+			  month: date.getMonth() + 1, //获取当前月份(0-11,0代表1月)
+			  strDate: date.getDate(), // 获取当前日(1-31)
+			  hour: date.getHours(), //获取当前小时(0 ~ 23)
+			  minute: date.getMinutes(), //获取当前分钟(0 ~ 59)
+			  second: date.getSeconds() //获取当前秒数(0 ~ 59)
+			}
+		 
+			Object.keys(obj).forEach(key => {
+				if (obj[key] < 10) obj[key] = `0${obj[key]}`
+				// console.log(obj[key])
+			})
+		 
+			return [`${obj.year}年${obj.month}月${obj.strDate}日`, `${obj.hour}:${obj.minute}:${obj.second}`]
+		}
+		var shuaxin = setInterval(function renwu(){
+				var now = new Date();
+				var num = parseInt((parseInt(now/1000) - parseInt(start_time/1000))/(90*60)) + 1;
+				function zhehe(n) {
+					if (n <100) {
+						n = n + "/100";
+						return n;
+					} else if (n < 250) {
+						n = n - 100 + "/150";
+						return n;
+					} else if (n < 450) {
+						n = n - 250 + "/200";
+						return n;
+					} else if (n < 700) {
+						n = n - 450 + "/250";
+						return n;
+					} else if (n < 1000) {
+						n = n - 700 + "/300";
+						return n;
+					} else if (n < 1400) {
+						n = n - 1000 + "/400";
+						return n;
+					} else if (n < 1900) {
+						n = n - 1400 + "/500";
+						return n;
+					} else if (n < 2500) {
+						n = n - 1900 + "/600";
+						return n;
+					} else if (n < 3200) {
+						n = n - 2500 + "/700";
+						return n;
+					} else if (n < 4000) {
+						n = n - 3200 + "/800";
+						return n;
+					} else if (n < 4900) {
+						n = n - 4000 + "/900";
+						return n;
+					}
+				}
+				function yu(a,b) {
+					if ((total_mission_num-a)*50 > b){
+						return 0;
+					} else if ((total_mission_num-a)*50 <= b) {
+						var c = b - (total_mission_num-a)*50;
+						return c;
+					}
+				}
+				if (num < 1) {
+				
+					document.getElementById('title').innerHTML = getNowFormatDate(start_time)[0]+"庆典兑换";
+					document.getElementById('content_title').innerHTML = getNowFormatDate(start_time)[0]+"庆典兑换";
+					
+					document.getElementById('start').innerHTML = "庆典开始时间："+getNowFormatDate(start_time)[0]+" "+getNowFormatDate(start_time)[1];
+					document.getElementById('end').innerHTML = "庆典结束时间："+getNowFormatDate(end_time)[0]+" "+getNowFormatDate(end_time)[1];
+					
+					document.getElementById('bx7average').innerHTML = "平均每个任务" +(1900/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx8average').innerHTML = "平均每个任务" + (2500/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx9average').innerHTML = "平均每个任务" + (3200/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx10average').innerHTML = "平均每个任务" + (4000/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx11average').innerHTML = "平均每个任务" + (4900/total_mission_num).toFixed(2) + "星";
+					
+					document.getElementById('renwuyi').innerHTML = "活动尚未开始哦！";
+					
+				} else if (num > 0 && num < total_mission_num+1) {
+				
+					document.getElementById('title').innerHTML = getNowFormatDate(start_time)[0]+"庆典兑换";
+					document.getElementById('content_title').innerHTML = getNowFormatDate(start_time)[0]+"庆典兑换";
+					
+					document.getElementById('start').innerHTML = "庆典开始时间："+getNowFormatDate(start_time)[0]+" "+getNowFormatDate(start_time)[1];
+					document.getElementById('end').innerHTML = "庆典结束时间："+getNowFormatDate(end_time)[0]+" "+getNowFormatDate(end_time)[1];
+					
+					document.getElementById('renwuzong').innerHTML = "本次庆典共" + total_mission_num + "个任务";
+					document.getElementById('renwuyi').innerHTML = "本次庆典已过去" + num + "个任务";
+					document.getElementById('renwuyu').innerHTML = "本次庆典还剩余" + (total_mission_num-num) + "个任务" + "<br>";
+					
+					document.getElementById('bx7average').innerHTML = "平均每个任务" +(1900/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx8average').innerHTML = "平均每个任务" + (2500/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx9average').innerHTML = "平均每个任务" + (3200/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx10average').innerHTML = "平均每个任务" + (4000/total_mission_num).toFixed(2) + "星";
+					document.getElementById('bx11average').innerHTML = "平均每个任务" + (4900/total_mission_num).toFixed(2) + "星";
+					
+					document.getElementById('bx7a').innerHTML = "以平均值计算，你现在应有" + parseInt(num*1900/total_mission_num) + "星，折合" + zhehe(parseInt(num*1900/total_mission_num));
+					document.getElementById('bx7b').innerHTML = "为完成7宝箱，你现在至少应有" + yu(num,1900) + "星，折合" + zhehe(yu(num,1900)) + "【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】";
+					
+					
+					document.getElementById('bx8a').innerHTML = "以平均值计算，你现在应有" + parseInt(num*2500/total_mission_num) + "星，折合" + zhehe(parseInt(num*2500/total_mission_num));
+					document.getElementById('bx8b').innerHTML = "为完成8宝箱，你现在至少应有" + yu(num,2500) + "星，折合" + zhehe(yu(num,2500)) + "【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】";
+					
+					document.getElementById('bx9a').innerHTML = "以平均值计算，你现在应有" + parseInt(num*3200/total_mission_num) + "星，折合" + zhehe(parseInt(num*3200/total_mission_num));
+					document.getElementById('bx9b').innerHTML = "为完成9宝箱，你现在至少应有" + yu(num,3200) + "星，折合" + zhehe(yu(num,3200)) + "【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】";
+					
+					document.getElementById('bx10a').innerHTML = "以平均值计算，你现在应有" + parseInt(num*4000/total_mission_num) + "星，折合" + zhehe(parseInt(num*4000/total_mission_num));
+					document.getElementById('bx10b').innerHTML = "为完成10宝箱，你现在至少应有" + yu(num,4000) + "星，折合" + zhehe(yu(num,4000)) + "【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】";
+					
+					document.getElementById('bx11a').innerHTML = "以平均值计算，你现在应有" + parseInt(num*4900/total_mission_num) + "星，折合" + zhehe(parseInt(num*4900/total_mission_num));
+					document.getElementById('bx11b').innerHTML = "为完成11宝箱，你现在至少应有" + yu(num,4900) + "星，折合" + zhehe(yu(num,4900)) + "【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】";
+					
+				} else {
+					document.getElementById('renwuyi').innerHTML = "本次活动已结束，期待下次活动吧！";
+					clearInterval(shuaxin);
+					return;
+				}
+			}
+		,1000);
+	</script>
+	<title id="title">xxxx年xx月xx日庆典兑换</title>
+</head>
+<body>
+	<div class="content">
+		<p id="content_title">xxxx年xx月xx日庆典兑换</p>
+		<br>
+		<div class="content-content">
+			<div class="qingdian">
+				<div id="start">庆典开始时间：</div>
+				<div id="end">庆典结束时间：</div>
+				<br>
+				<div class="qingdian-title">当前时间&nbsp;&nbsp;<span id="qingdiantime"><script>setInterval("document.getElementById('qingdiantime').innerHTML=new Date().toLocaleString();", 1000);</script></span></div>
+				<div class="qingdian-renwuzong" id="renwuzong">本次庆典共x个任务</div>
+				<div class="qingdian-renwuyi" id="renwuyi">本次庆典已过去x个任务</div>
+				<div class="qingdian-renwuyu" id="renwuyu">本次庆典已过去x个任务</div>
+				<br>
+				<div class="qingdian-tab-content">
+					<div class="show">
+						<p id="bx7">领7个宝箱，可开出38个活动道具，总计1900星</p>
+						<p id="bx7average">平均每个任务x星</p>
+						<p id="bx7a">以平均值计算，你现在应有x星，折合x/x</p>
+						<p id="bx7b">为完成7宝箱，你现在至少应有x星，折合x/x【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】</p>
+					</div>
+					<br>
+					<div>
+						<p id="bx8">领8个宝箱，可开出50个活动道具，总计2500星</p>
+						<p id="bx8average">平均每个任务x星</p>
+						<p id="bx8a">以平均值计算，你现在应有x星，折合x/x</p>
+						<p id="bx8b">为完成8宝箱，你现在至少应有x星，折合x/x【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】</p>
+					</div>
+					<br>
+					<div>
+						<p id="bx9">领9个宝箱，可开出64个活动道具，总计3200星</p>
+						<p id="bx9average">平均每个任务x星</p>
+						<p id="bx9a">以平均值计算，你现在应有x星，折合x/x</p>
+						<p id="bx9b">为完成9宝箱，你现在至少应有x星，折合x/x【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】</p>
+					</div>
+					<br>
+					<div>
+						<p id="bx10">领10个宝箱，可开出80个活动道具，总计4000星</p>
+						<p id="bx10average">平均每个任务x星</p>
+						<p id="bx10a">以平均值计算，你现在应有x星，折合x/x</p>
+						<p id="bx10b">为完成10宝箱，你现在至少应有x星，折合x/x【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】</p>
+					</div>
+					<br>
+					<div>
+						<p id="bx11">领11个宝箱，可开出98个活动道具，总计4900星</p>
+						<p id="bx11average">平均每个任务x星</p>
+						<p id="bx11a">以平均值计算，你现在应有x星，折合x/x</p>
+						<p id="bx11b">为完成11宝箱，你现在至少应有x星，折合x/x【补充说明：这意味着接下来所有任务都要做50星，请尽量避免压着最低线做任务】</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
