@@ -1,0 +1,52 @@
+		/* 设置表格样式 */
+		table {
+			/* margin: 20px auto; */
+			border-collapse: collapse;
+			/* width: 100%; */
+			background-color: #d0ffff;
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+		}
+
+		/* 设置表格奇偶行的背景色 */
+		tr:nth-child(odd) {
+			background-color: #e2ffff;
+		}
+
+		tr {
+			white-space: nowrap;
+		}
+
+		/* 设置表格列的边框样式和文本居中 */
+		th,
+		td {
+			border: 1px solid #ccc;
+			text-align: center;
+			padding: 8px;
+		}
+		th {
+			background-color: #abffff;/* 设置表格标题行的背景色 */
+		}
+		#div_out thead {
+			position: sticky;
+			top: 0;
+			background-color: #fff;
+			/* 设置标题行的背景色 */
+		}
+
+		#div_out {
+			position: relative;
+		}
+
+		button {
+			background-color: dodgerblue;
+			color: white;
+			width: 300px;
+			height: 47px;
+			border: 0;
+			font-size: 16px;
+			border-radius: 30px;
+		}
+
+		button:hover {
+			background-color: #bdcefc;
+		}
